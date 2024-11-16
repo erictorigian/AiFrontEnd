@@ -5,7 +5,6 @@ from rxconfig import config
 def index() -> rx.Component:
     # Welcome Page (Index)
     return ui.base_layout(
-        rx.color_mode.button(position="top-right"),
         rx.vstack(
             rx.heading("Welcome to Reflex AiFrontEnd!", size="9"),
             rx.text(
