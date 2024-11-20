@@ -1,4 +1,5 @@
 import reflex as rx
+from AiFrontEnd import navigation
 
 def navbar_link(text: str, url: str) -> rx.Component:
     return rx.link(
@@ -17,8 +18,9 @@ def base_navbar() -> rx.Component:
                     align_items="center",
                 ),
                 rx.hstack(
-                    navbar_link("Home", "/"),
-                    navbar_link("About", "/about"),
+                    navbar_link("Home", navigation.routes.HOME_ROUTE),
+                    navbar_link("Chat", navigation.routes.CHAT_ROUTE),
+                    navbar_link("About",navigation.routes.ABOUT_ME),
                     justify="end",
                     spacing="5",
                 ),
@@ -39,8 +41,9 @@ def base_navbar() -> rx.Component:
                         rx.icon("menu", size=30)
                     ),
                     rx.menu.content(
-                        rx.menu.item("Home"),
-                        rx.menu.item("About"),
+                        rx.menu.item("Home", on_click=navigation.state.NavState.to_home),
+                         rx.menu.item("Chat", on_click=navigation.state.NavState.to_chat),
+                        rx.menu.item("About", on_click=navigation.state.NavState.to_about),
                     ),
                     justify="end",
                 ),
