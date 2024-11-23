@@ -1,7 +1,7 @@
 import reflex as rx
 from typing import List
 from . import ai
-from AiFrontEnd.models import Chat
+from AiFrontEnd.models import ChatSession
 
 class ChatMessage(rx.Base):
     message: str
@@ -17,15 +17,19 @@ class ChatState(rx.State):
     
     def on_load(self):
         with rx.session() as session:
-            Chat
+            ChatSession
             results = session.exec(
-                Chat.select()
+                ChatSession.select()
             ).all()
             print(results)
     
     def append_message(self, message, is_bot:bool=False):
+        with rx.session() as session:
+            obj = ChatSession()
+            session.add(obj)
+            session.commit()
         self.messages.append(
-            ChatMessage(
+            ChatSession(
                 message=message,
                 is_bot = is_bot
                 )
